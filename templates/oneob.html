@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <center>
+        <br>
+        <br>
+        <br>
+        <img alt=" " src="{{ob.image.url}}" width="350" height="450">
+        <h1 style="color: lightslategray; font-weight: bolder;">{{ob.title}}</h1>
+        <h3 style="color: lightslategray;"> From: ${{ob.price}}</h3>
+        <h3 style="color: lightslategray;">Description: {{ob.description}} </h3>
+        {% if ob.offer %}
+        <h3 style="color: lightslategray;">Special offer</h3>
+        {% endif %}
+
+        <form action="." method="post">
+            <center>
+                {% csrf_token %}
+
+                <br>
+                <br>
+                <label for="title">Product: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <span>
+                    <input class="account_input" id="title" name="title"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text" disabled
+                           value="{{ob.title}}">
+                </span>
+                <br>
+                <br>
+                <label for="user">User: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <span>
+                    <input class="account_input" id="user" name="user"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text" disabled
+                           value="{{user.username}}">
+                </span>
+                <br>
+                <br>
+                <label for="size">Size: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <span>
+                    <input class="account_input" id="size" name="size"
+                           placeholder="Enter size"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                           value="">
+                </span>
+                <br>
+                <br>
+                <label for="quantity">Quantity: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <span>
+                    <input class="account_input" id="quantity" name="quantity"
+                           placeholder="Enter Quantity"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                           value="" onkeyup="totalprice()">
+                </span>
+                <br>
+                <br>
+                <label for="total_price">Total Price: &nbsp;&nbsp;&nbsp;</label>
+                    <span>
+                    <input class="account_input" id="total_price" name="total_price"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text" disabled
+                           value="">
+                </span>
+                <br>
+                <br>
+                <input type="submit" value="Shopping Cart" class="btn btn-default btn-sm">
+
+            </center>
+        </form>
+
+        <h2><a href="delete/"><input name="Delete" type="button" value="Delete" style="color: lightslategray; font-weight: bolder;"></a></h2>
+
+<!--        <form action="." method="post">-->
+<!--            {% csrf_token %}-->
+
+<!--            {%  if form %}-->
+<!--                <input type="submit" value="Continue Cart">-->
+<!--            {% else %}-->
+<!--                <input type="submit" value="Shopping Cart" class="btn btn-default btn-sm">-->
+<!--            {% endif %}-->
+<!--        </form>-->
+    </center>
+</div>
+
+<script>
+    function totalprice() {
+    a = Number(document.getElementById('quantity').value);
+    b = {{ob.price}};
+    c = a * b;
+    document.getElementById('total_price').value = c;
+    }
+</script>
+
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="cart-title mt-50">
+                    <center>
+                        <h2 style="font-family: serif; font-weight: bolder; color: slategrey;">Shopping Cart</h2>
+                    </center>
+                </div>
+                <br>
+                <br>
+
+                <h6 class="cart-table clearfix">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr style="background-color: black; height: 50px; color: white; size: 30px; font-size: x-large;">
+                                <th></th>
+                                <th><br><center>Name</center><br></th>
+                                <th><br><center>Price</center><br></th>
+                                <th><br><center>Quantity</center><br></th>
+                                <th><br><center>Total</center><br></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ob in ob %}
+                            <tr>
+                                <td class="cart_product_img">
+                                    <center><img src="{{ob.title.image.url}}" alt="..." width="120" height="100"></center>
+                                </td>
+                                <td class="cart_product_desc">
+                                    <br><center><h5 style="font-family: serif; font-weight: bolder; color: slategrey;">{{ob.title.title}}</h5></center>
+                                </td>
+                                <td class="price">
+                                    <br><center><h6 style="font-family: serif; font-weight: bolder; color: slategrey;">${{ob.title.price}}</h6></center>
+                                </td>
+                                <td class="qty">
+                                    <span>
+                                        <br><center><h6 style="font-family: serif; font-weight: bolder; color: slategrey;">{{ob.quantity}}</h6></center>
+                                    </span>
+                                </td>
+                                <td class="totalprice">
+                                    <br><center><h6 style="font-family: serif; font-weight: bolder; color: slategrey;">${{ob.total_price}}</h6></center>
+                                </td>
+                                <td>
+                                    <br>
+                                    <center>
+                                        <a href="{% url 'textileapp:checkout' ob.title_id %}"><input type="submit" value="Checkout" style="color: lightslategray; font-weight: bolder;"></a>&nbsp;&nbsp;
+                                        <a href="{% url 'textileapp:delete_cart' ob.id %}"><input type="submit" value="Remove" style="color: lightslategray; font-weight: bolder;"></a>
+                                    </center>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </h6>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+
+{% endblock content %}

@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 ftco-animate">
+                <form action="." class="billing-form" method="post">
+                    {% csrf_token %}
+                    <h3 class="mb-4 billing-heading" style="font-weight: bolder;"><center>Billing Details</center></h3><br>
+                    <div class="row align-items-end">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstname">Firt Name</label>
+                                <input class="form-control" id="firstname" name="firstname" placeholder="" type="text" value="{{request.user}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input class="form-control" id="lastname" name="lastname" placeholder="" type="text" value="{{ob.user.last_name}}">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="country">State / Country</label>
+                                <input class="form-control" id="country" name="state" placeholder="State and Country name"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="streetaddress">Street Address</label>
+                                <input class="form-control" id="streetaddress" name="street" placeholder="House number and street name"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+								<label for="apartment">Apartment</label>
+                                <input class="form-control" id="apartment" name="apartment" placeholder="Appartment, suite, unit etc: (optional)"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="towncity">Town / City</label>
+                                <input class="form-control" id="towncity" name="town" placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="postcodezip">Postcode / ZIP *</label>
+                                <input class="form-control" id="postcodezip" name="postcode" placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input class="form-control" id="phone" name="phone" placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="emailaddress">Email Address</label>
+                                <input class="form-control" id="emailaddress" name="email" placeholder="" type="text" value="{{ob.user.email}}">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="cart-total mb-3"><center>
+                        <h3 style="font-weight:bolder;">Coupon Code</h3>
+                        <br>
+                        <p>Enter your coupon code if you have one</p>
+                        <label for="coupon">Coupon code</label>
+                        <input type="text" name="coupon" id="coupon" class="form-control text-left px-3" placeholder="Coupon code" style="width:50%;">
+                        <br>
+                        <input type="text" name="couponprice" id="coupon-price" class="form-control text-left px-3" style="width:20%;" value="">
+                    </center>
+                    </div>
+                    <br>
+                    <center><button class="btn btn-primary" onclick="function1()">Place an order</button></center>
+                </form><!-- .form -->
+				<br>
+				<br>
+
+                <div class="row mt-5 pt-3 d-flex">
+                    <div class="col-md-4 d-flex">
+                        <center>
+                        <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                            <h3 class="billing-heading mb-4" style="font-weight:bolder;">Cart Total</h3>
+                            <br>
+                            <p class="d-flex">
+                                <span>Subtotal&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</span>
+                                <span>$ {{ob.total_price}}</span>
+                            </p>
+                            <p class="d-flex">
+                                <span>Delivery&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</span>
+                                <span>$ 0.00</span>
+                            </p>
+                            <p class="d-flex">
+                                <span>Discount&nbsp;&nbsp;&nbsp;:&nbsp;</span>
+                                <span>$ {{co.cprice}}</span>
+                            </p>
+                            <hr>
+                            <p class="d-flex total-price">
+                                <span>Total&nbsp;&nbsp;:&nbsp;</span>
+                                <span>$ {{ob.total_price}}</span>
+                            </p>
+                        </div>
+                        </center>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="cart-detail bg-light p-3 p-md-4">
+                            <h3 class="billing-heading mb-4" style="font-weight:bolder;">Payment Method</h3>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="radio">
+                                        <label><input class="mr-2" name="optradio" type="radio"> Direct Bank Transfer</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="radio">
+                                        <label><input class="mr-2" name="optradio" type="radio"> Check Payment</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="radio">
+                                        <label><input class="mr-2" name="optradio" type="radio"> Paypal</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="checkbox">
+                                        <label><input class="mr-2" type="checkbox" value=""> I have read and accept the
+                                            terms and conditions</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <p><a class="btn btn-primary py-3 px-4" href="#">Order</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- .col-md-8 -->
+        </div> <!-- .row -->
+    </div> <!-- .container -->
+</section> <!-- .section -->
+<script type="text/javascript">
+    function function1(){
+    tp = {{obj.total_price}};
+    cp = {{co.cprice}};
+    amt = tp - cp;
+    document.getElementById('coupon-price').value = amt;
+    }
+</script>
+<br>
+<br>
+{% endblock content %}

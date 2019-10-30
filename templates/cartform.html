@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<section id="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 clearfix">
+                <ul class="blog-zone">
+                    <li>
+                        <div class="blog-icon">
+                            <i class="fa  fa-pencil"></i>
+                        </div>
+                        <div class="blog-box">
+                            <div style="width: 700px; height: 700px; margin: auto;">
+                                <br>
+                                <br>
+                                <form action="" method="POST" enctype=multipart/form-data>
+                                    <center>
+                                        <h3 style="color: lightslategray; font-weight: bolder; font-style: italic; font-family: serif;">Add To Cart</h3>
+                                        <br>
+                                        <br>
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <a href="{% url 'addtocart' %}" class="btn btn-info btn-lg">
+                                            <span class="fa fa-shopping-cart"></span>Continue
+                                        </a>
+                                    </center>
+                                </form>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
